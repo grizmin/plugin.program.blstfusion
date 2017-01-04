@@ -141,6 +141,8 @@ class dodat():
             self.__cb({'pr': 10, 'str': 'Session'})
         r = self.__s.post(self.__URL_LOGIN, timeout=self.__t,
                           headers=self.__UA)
+        print('KKK DATA: %r' % self.__UA)
+        print('KKK Request headers: %r' % r.headers)
 
         if r.status_code == requests.codes.ok:
             if self.__cb:
@@ -163,7 +165,8 @@ class dodat():
 
             r = self.__s.post(self.__URL_LOGIN, timeout=self.__t,
                               headers=self.__UA, files=self.__p_data)
-
+            print('KKK request data %r' % r.text)
+            print('KKK PDATA %r' % self.__p_data)
             self.__log_dat(r.request.headers)
             self.__log_dat(r.request.body)
 
@@ -310,18 +313,20 @@ class dodat():
 
                 if self.__gen_m3u:
                     if not map:
-                        pl = pl + '#EXTINF:-1 radio="%s" group-title="%s" tvg-logo="%s" tvg-id="%s",%s\n%s|User-Agent=%s\n' % (
-                        ch['radio'], ch_group_name, ch['epg_name'], ch['epg_name'], ch['title'], ch['sources'],
-                        urllib.quote_plus(self.__UA['User-Agent']))
+                        pl = pl + '#EXTINF:-1 radio="%s" group-title="%s" tvg-logo="%s" tvg-id="%s",%s\n%s\n' % (
+                        # pl = pl + '#EXTINF:-1 radio="%s" group-title="%s" tvg-logo="%s" tvg-id="%s",%s\n%s|User-Agent=%s\n' % (
+                        ch['radio'], ch_group_name, ch['epg_name'], ch['epg_name'], ch['title'], ch['sources'])
+                        # ch['radio'], ch_group_name, ch['epg_name'], ch['epg_name'], ch['title'], ch['sources'],urllib.quote_plus(self.__UA['User-Agent']))
                     else:
                         e_map = map.get(ch['epg_name'], {
                             ch['epg_name']: {'id': ch['epg_name'], 'offset': '0', 'ch_logo': ch['epg_name']}})
                         gid = e_map.get('id', ch['epg_name'])
                         offset = e_map.get('offset', '0')
                         logo = e_map.get('ch_logo', ch['epg_name'])
-                        pl = pl + '#EXTINF:-1 radio="%s" tvg-shift=%s group-title="%s" tvg-logo="%s" tvg-id="%s",%s\n%s|User-Agent=%s\n' % (
-                        ch['radio'], offset, ch_group_name, logo, gid, ch['title'], ch['sources'],
-                        urllib.quote_plus(self.__UA['User-Agent']))
+                        # pl = pl + '#EXTINF:-1 radio="%s" tvg-shift=%s group-title="%s" tvg-logo="%s" tvg-id="%s",%s\n%s|User-Agent=%s\n' % (
+                        pl = pl + '#EXTINF:-1 radio="%s" tvg-shift=%s group-title="%s" tvg-logo="%s" tvg-id="%s",%s\n%s\n' % (
+                        ch['radio'], offset, ch_group_name, logo, gid, ch['title'], ch['sources'])
+                        # ch['radio'], offset, ch_group_name, logo, gid, ch['title'], ch['sources'],urllib.quote_plus(self.__UA['User-Agent']))
 
                 if self.__gen_jd:
                     jdump[ch['epg_name']] = ch['epg_name']

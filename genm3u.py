@@ -7,8 +7,8 @@ __data__ = os.getcwd()
 __resource__ =  os.path.join( __cwd__, 'resources', 'lib')
 sys.path.insert(0, __resource__)
 dbg='false'
-__version__='0.01'
-__scriptname__='bsfc'
+__version__='1.0.4'
+__scriptname__=''
 print(os.getcwd())
 __ua_os = {
   '0' : {'ua' : 'pcweb', 'osid' : 'pcweb'},
