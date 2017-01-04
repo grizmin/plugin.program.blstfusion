@@ -90,24 +90,18 @@ class dodat():
     def __log_dat(self, d):
         if self.__DEBUG_EN is not True:
             return
-        print
-        '--------- BEGIN ---------'
+        print '--------- BEGIN ---------'
         if type(d) is str:
-            print
-            d
+            print d
         elif type(d) is dict or type(d).__name__ == 'CaseInsensitiveDict':
             for k, v in d.iteritems():
-                print
-                k + ' : ' + str(v)
+                print k + ' : ' + str(v)
         elif type(d) is list:
             for l in d:
-                print
-                l
+                print l
         else:
-            print
-            'Todo add type %s' % type(d)
-        print
-        '--------- END -----------'
+            print 'Todo add type %s' % type(d)
+        print '--------- END -----------'
 
     def __store_data(self):
         with open(os.path.join(self.__path, '', 'data.dat'), 'wb+') as f:
@@ -172,7 +166,6 @@ class dodat():
 
             self.__log_dat(r.request.headers)
             self.__log_dat(r.request.body)
-
 
             if r.status_code == requests.codes.ok:
                 data = r.json()
