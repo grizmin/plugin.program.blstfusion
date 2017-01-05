@@ -1,5 +1,5 @@
 # plugin.program.bscfusiontv
 
-_install in virtualenvironmment is reccomended_
+_virtualenv is recommended_
 
 ``` pip install -r requirements.txt ```
